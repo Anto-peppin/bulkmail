@@ -3,11 +3,15 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
 const app = express();
+const dotenv = require('dotenv')
+
+
+dotenv.config(); 
 
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://peppin03:peppin03@cluster0.u4lbeki.mongodb.net/bulkMail?retryWrites=true&w=majority&appName=Cluster0").then(() => {
+mongoose.connect(process.env.MONGODB_URL).then(() => {
   console.log("Database Start...")
   
 });
@@ -27,10 +31,9 @@ const history = mongoose.model(
 
 
 
-app.get('/mail',async(req,res)=>{
+app.get('/history',async(req,res)=>{
  const damail = await history.find()
  res.send(damail)
- 
 
 })
 
@@ -78,6 +81,6 @@ app.post("/mail", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server start....");
 });

@@ -104,7 +104,7 @@ const timeDate = ()=>{
       } else {
         setSend(true);
         axios
-          .post("http://localhost:3000/mail", { finalArr, text, subject,date,time })
+          .post(`${import.meta.env.VITE_MAIL}`,{ finalArr, text, subject,date,time })
           .then((val) => {
             setSend(val.data[0]);
             if (val.data[1]) {

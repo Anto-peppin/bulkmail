@@ -8,7 +8,7 @@ const FIlereader = () => {
 
   useEffect(()=>{
     const dbapi = async()=>{
-    const historyData = await axios.get('http://localhost:3000/mail')
+    const historyData = await axios.get(`${import.meta.env.VITE_HISTORY}`)
     setHistory(historyData.data);
 
     }
